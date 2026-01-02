@@ -19,11 +19,6 @@ Ludo — Simple Browser Game
 - Sounds: dice rolls and finishing a token play lightweight synthesized sounds (Web Audio).
 - UI: center overlay for status, home highlight for active player, stacked tokens spread on safe tiles for easier selection.
 
-## Launching on GitHub Pages
-1) Create a GitHub repo and commit all files in this folder.
-2) Push the repo to GitHub.
-3) In the repo’s Settings → Pages, select the `main` (or your default) branch, root folder, and save.
-4) Visit the provided Pages URL to play in the browser.
 
 
 

@@ -1,0 +1,13 @@
+{
+  "name": "ludo-online",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Simple browser Ludo game with optional WebSocket room sync",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
+}

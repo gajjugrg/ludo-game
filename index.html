@@ -42,8 +42,18 @@
       </label>
       <button id="newGameBtn">New Game</button>
       <button id="toggleAiBtn">Toggle AI for Player 2</button>
-      <button id="renamePlayersBtn">Rename Players</button>
       <button id="debugUnlock">Unlock Debug</button>
+      <label>Session:
+        <input id="roomCode" type="text" placeholder="code" style="width:110px">
+      </label>
+      <label>Name:
+        <input id="userName" type="text" placeholder="your name" style="width:140px">
+      </label>
+      <button id="connectRoomBtn">Join</button>
+      <span id="connStatus" style="font-size:12px;color:#4b5563;"></span>
+      <label>You:
+        <select id="localPlayer"></select>
+      </label>
     </div>
   </header>
 
@@ -112,6 +122,14 @@
       <div class="debug-row">
         <button id="debugLogRefresh">Refresh Log</button>
         <button id="debugLogCopy">Copy Log</button>
+      </div>
+      <div class="debug-row">
+        <label>Replay from log:</label>
+        <textarea id="replayLogInput" rows="6" placeholder="Paste the full copied move log here..."></textarea>
+      </div>
+      <div class="debug-row">
+        <button id="replayLoadBtn">Load Replay</button>
+        <button id="replayStepBtn">Step</button>
       </div>
       <div class="debug-row">
         <label><input type="checkbox" id="debugPauseAi"> Pause AI auto-roll</label>

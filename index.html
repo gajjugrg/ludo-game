@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Ludo — Play in Browser</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1 style="margin:0">LUDO<br><span style="font-size:14px;font-weight:400;display:block">by Gaju</span></h1>
+
+    <!-- hidden inline svg symbols -->
+    <svg style="display:none">
+      <symbol id="icon-dice" viewBox="0 0 24 24">
+        <rect x="1" y="1" width="22" height="22" rx="3" fill="#fff" stroke="#ccc"/>
+        <circle cx="6" cy="6" r="1.5" fill="#333"/>
+        <circle cx="18" cy="6" r="1.5" fill="#333"/>
+        <circle cx="6" cy="18" r="1.5" fill="#333"/>
+        <circle cx="18" cy="18" r="1.5" fill="#333"/>
+        <circle cx="12" cy="12" r="1.5" fill="#333"/>
+      </symbol>
+      <symbol id="icon-home" viewBox="0 0 24 24">
+        <path d="M3 11.5L12 4l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1v-8.5z" fill="#fff"/>
+      </symbol>
+      <symbol id="icon-star" viewBox="0 0 24 24">
+        <path d="M12 .587l3.668 7.431L23.4 9.75l-5.4 5.265L19.335 24 12 19.897 4.665 24l1.336-8.985L.6 9.75l7.732-1.732L12 .587z" fill="#fff"/>
+      </symbol>
+      <symbol id="icon-shield" viewBox="0 0 24 24">
+        <path d="M12 1.5l8 3.2v6.5c0 4.9-3.4 9.5-8 11-4.6-1.5-8-6.1-8-11V4.7z" fill="#2f5bff"/>
+        <path d="M12 4.5l-5 2v4.2c0 3.4 2.4 6.6 5 7.7 2.6-1.1 5-4.3 5-7.7V6.5z" fill="#fff"/>
+      </symbol>
+    </svg>
+
+    <div class="controls">
+      <label>Players:
+        <select id="playerCount">
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4" selected>4</option>
+        </select>
+      </label>
+      <button id="newGameBtn">New Game</button>
+      <button id="toggleAiBtn">Toggle AI for Player 2</button>
+      <button id="renamePlayersBtn">Rename Players</button>
+      <button id="debugUnlock">Unlock Debug</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="play-area">
+      <div id="board" class="board">
+        <div class="container card"></div>
+      </div>
+      <div class="right-panel">
+        <div class="dice-panel">
+          <div class="dice-lg">
+            <button id="rollBtn" class="dice-btn dice-btn-lg" title="Roll the dice">
+              <svg class="dice-icon" width="36" height="36" viewBox="0 0 24 24"><use href="#icon-dice"/></svg>
+            </button>
+            <div class="dice-readout">
+              <div class="dice-label">Roll</div>
+              <div id="diceValue" class="dice-value">-</div>
+            </div>
+          </div>
+          <div id="status">Click "New Game" to begin ✅</div>
+        </div>
+        <aside class="side-panel">
+          <h2>Players</h2>
+          <ul id="playersList"></ul>
+        </aside>
+      </div>
+    </div>
+    <div id="finishBasket" class="finish-basket">
+      <div class="basket-title">Finished Tokens</div>
+      <div class="basket-row">
+        <div class="basket-slot red" data-color="red"></div>
+        <div class="basket-slot green" data-color="green"></div>
+        <div class="basket-slot yellow" data-color="yellow"></div>
+        <div class="basket-slot blue" data-color="blue"></div>
+      </div>
+    </div>
+    <section class="debug-panel hidden" id="debugPanel" aria-label="Debug tools">
+      <h3>Debug</h3>
+      <div class="debug-row">
+        <label>Roll:
+          <input id="debugRoll" type="number" min="1" max="6" value="6">
+        </label>
+      </div>
+      <div class="debug-row">
+        <label>Player:
+          <select id="debugPlayer"></select>
+        </label>
+        <label>Token:
+          <select id="debugToken">
+            <option value="0">1</option>
+            <option value="1">2</option>
+            <option value="2">3</option>
+            <option value="3">4</option>
+          </select>
+        </label>
+      </div>
+      <div class="debug-row debug-actions">
+        <button id="debugMove">Move Token (use roll)</button>
+        <button id="debugFinish">Jump to Finish</button>
+        <button id="debugUndo">Undo Last Move</button>
+      </div>
+      <div class="debug-row">
+        <label>Move log:</label>
+        <textarea id="moveLogDisplay" rows="5" readonly style="min-width:260px;"></textarea>
+      </div>
+      <div class="debug-row">
+        <button id="debugLogRefresh">Refresh Log</button>
+        <button id="debugLogCopy">Copy Log</button>
+      </div>
+      <div class="debug-row">
+        <label><input type="checkbox" id="debugPauseAi"> Pause AI auto-roll</label>
+        <label>Force turn:
+          <select id="debugForceTurn"></select>
+        </label>
+      </div>
+      <p class="debug-note">Debug actions override turn order/validity to test edge cases quickly.</p>
+    </section>
+  </main>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

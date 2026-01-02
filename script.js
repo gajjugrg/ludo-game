@@ -40,6 +40,8 @@ let peerNamesById = {};
 let localUserName = '';
 const DEBUG_PASSWORD = (window.LUDO_DEBUG_PASSWORD || '').trim();
 const IS_LOCALHOST = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+const IS_FILE = (window.location.protocol === 'file:');
+const IS_LOCAL_ENV = IS_LOCALHOST || IS_FILE;
 const WS_URL = (()=>{
   const configured = (window.LUDO_WS_URL || '').trim();
   if(configured) return configured;
@@ -519,11 +521,11 @@ function toggleDebugLock(){
     return;
   }
   if(!DEBUG_PASSWORD){
-    if(!IS_LOCALHOST){
+    if(!IS_LOCAL_ENV){
       statusEl.textContent = 'Debug disabled (no password configured).';
       return;
     }
-    const ok = confirm('Enable debug tools on localhost?');
+    const ok = confirm('Enable debug tools on this local page?');
     if(!ok) return;
     debugUnlocked = true;
     debugPanel.classList.remove('hidden');
